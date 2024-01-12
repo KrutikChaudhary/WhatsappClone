@@ -82,4 +82,9 @@ public class Repository {
         });
         return chatGroupMutableLiveData;
     }
+
+    //creating a new group
+    public void createNewChatGroup(String groupName){
+        reference.setValue(groupName);
+    }
 }

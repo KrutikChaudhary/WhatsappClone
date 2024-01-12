@@ -38,4 +38,8 @@ public class MyViewModel extends AndroidViewModel {
     public MutableLiveData<List<ChatGroup>> getGroupList(){
         return repository.getChatGroupMutableLiveData();
     }
+
+    public void createNewGroup(String groupName){
+        repository.createNewChatGroup(groupName);
+    }
 }

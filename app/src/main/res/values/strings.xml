@@ -3,4 +3,5 @@
     <string name="welcome_to_whatsapp_clone">Welcome to Whatsapp clone</string>
     <string name="anonymous_login">Anonymous Login</string>
     <string name="group_icon">group-icon</string>
+    <string name="chat_app">chat app</string>
 </resources>
