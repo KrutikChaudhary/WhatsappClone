@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.whatsaapcloneapp.model.ChatGroup;
+import com.example.whatsaapcloneapp.model.ChatMessage;
 import com.example.whatsaapcloneapp.views.GroupsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,14 +26,16 @@ import java.util.List;
 public class Repository {
 
     MutableLiveData<List<ChatGroup>> chatGroupMutableLiveData;
-
+    MutableLiveData<List<ChatMessage>> messagesLiveData;
     FirebaseDatabase database;
     DatabaseReference reference;
+    DatabaseReference groupReference;
 
     public Repository() {
         chatGroupMutableLiveData = new MutableLiveData<>();
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference();
+        messagesLiveData = new MutableLiveData<>();
     }
 
     //Authentication
@@ -86,5 +89,32 @@ public class Repository {
     //creating a new group
     public void createNewChatGroup(String groupName){
         reference.child(groupName).setValue(groupName);
+    }
+
+    //getting messages Live Data
+
+    public MutableLiveData<List<ChatMessage>> getMessagesLiveData(String groupName) {
+        groupReference = database.getReference().child(groupName);
+        List<ChatMessage> messageList = new ArrayList<>();
+        groupReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                messageList.clear();
+
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    ChatMessage message = dataSnapshot.getValue(ChatMessage.class);
+                    messageList.add(message);
+                }
+
+                messagesLiveData.postValue(messageList);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return messagesLiveData;
     }
 }
