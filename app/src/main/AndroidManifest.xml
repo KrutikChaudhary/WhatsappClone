@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsaapCloneApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".views.ChatActivity"
+            android:exported="false" />
         <activity
             android:name=".views.GroupsActivity"
             android:exported="false" />

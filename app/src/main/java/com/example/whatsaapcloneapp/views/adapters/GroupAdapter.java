@@ -1,5 +1,6 @@
 package com.example.whatsaapcloneapp.views.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.whatsaapcloneapp.R;
 import com.example.whatsaapcloneapp.databinding.ItemCardBinding;
 import com.example.whatsaapcloneapp.model.ChatGroup;
+import com.example.whatsaapcloneapp.views.ChatActivity;
 
 import java.util.ArrayList;
 
@@ -56,6 +58,13 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
+
+                    ChatGroup clickedChatGroup = groupArrayList.get(position);
+
+                    Intent i = new Intent(v.getContext(), ChatActivity.class);
+
+                    i.putExtra("GROUP_NAME", clickedChatGroup.getGroupName());
+                    v.getContext().startActivity(i);
                 }
             });
         }
