@@ -117,4 +117,15 @@ public class Repository {
         });
         return messagesLiveData;
     }
+
+    public void sendMessage(String message, String chatGroup){
+        DatabaseReference ref = database.getReference(chatGroup);
+
+        if(!message.trim().equals("")){
+            ChatMessage msg = new ChatMessage(FirebaseAuth.getInstance().getUid(),message,System.currentTimeMillis());
+
+            String randomKey = ref.push().getKey();
+            ref.child(randomKey).setValue(msg);
+        }
+    }
 }

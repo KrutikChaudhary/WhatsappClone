@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.whatsaapcloneapp.R;
 import com.example.whatsaapcloneapp.databinding.ActivityChatBinding;
@@ -50,10 +51,21 @@ public class ChatActivity extends AppCompatActivity {
                 myAdapter.notifyDataSetChanged();
 
                 int latestPosition = myAdapter.getItemCount() -1;
-                recyclerView.smoothScrollToPosition(latestPosition);
+                if(latestPosition>0){
+                    recyclerView.smoothScrollToPosition(latestPosition);
+                }
+
             }
         });
 
         binding.setVModel(myViewModel);
+
+        binding.sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = binding.edittextChatMessage.getText().toString();
+                myViewModel.sendMessage(message,groupName);
+            }
+        });
     }
 }
