@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.whatsaapcloneapp.Repository.Repository;
 import com.example.whatsaapcloneapp.model.ChatGroup;
+import com.example.whatsaapcloneapp.model.ChatMessage;
 
 import java.util.List;
 
@@ -41,5 +42,10 @@ public class MyViewModel extends AndroidViewModel {
 
     public void createNewGroup(String groupName){
         repository.createNewChatGroup(groupName);
+    }
+
+    //messages
+    public MutableLiveData<List<ChatMessage>> getMessagesLiveData(String groupName){
+        return repository.getMessagesLiveData(groupName);
     }
 }
