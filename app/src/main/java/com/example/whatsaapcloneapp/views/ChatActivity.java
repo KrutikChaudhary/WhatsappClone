@@ -65,6 +65,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String message = binding.edittextChatMessage.getText().toString();
                 myViewModel.sendMessage(message,groupName);
+                binding.edittextChatMessage.getText().clear();
             }
         });
     }
