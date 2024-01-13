@@ -23,12 +23,15 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginEnd="200dp"
             android:contentDescription="@string/group_icon"
             android:src="@drawable/groupchat"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
         </ImageView>
 
@@ -36,14 +39,13 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="387dp"
             android:text="@{chatGroup.groupName}"
             android:textColor="@color/black"
-            android:textSize="38sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

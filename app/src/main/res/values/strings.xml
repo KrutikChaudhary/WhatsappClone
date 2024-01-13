@@ -4,4 +4,6 @@
     <string name="anonymous_login">Anonymous Login</string>
     <string name="group_icon">group-icon</string>
     <string name="chat_app">chat app</string>
+    <string name="please_enter_name_of_chat_group">Please enter name of chat group</string>
+    <string name="create_group">Create Group</string>
 </resources>

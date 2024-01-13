@@ -8,7 +8,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.whatsaapcloneapp.R;
 import com.example.whatsaapcloneapp.databinding.ActivityGroupsBinding;
@@ -30,6 +38,9 @@ public class GroupsActivity extends AppCompatActivity {
     private ActivityGroupsBinding binding;
     private MyViewModel myViewModel;
 
+    //Dialog
+    private Dialog chatGroupDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +61,38 @@ public class GroupsActivity extends AppCompatActivity {
 
 
                 groupAdapter = new GroupAdapter(chatGroupArrayList);
+                recyclerView.setAdapter(groupAdapter);
                 groupAdapter.notifyDataSetChanged();
             }
         });
+
+        binding.fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){showDialog();}
+        });
+    }
+
+    public void showDialog(){
+        chatGroupDialog = new Dialog(this);
+        chatGroupDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout,null);
+        chatGroupDialog.setContentView(view);
+        chatGroupDialog.show();
+
+        Button submit = view.findViewById(R.id.subitButton);
+        EditText editText = view.findViewById(R.id.GroupName);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String groupName = editText.getText().toString();
+
+                Toast.makeText(GroupsActivity.this, "Your Chat Group Name " + groupName, Toast.LENGTH_SHORT).show();
+                //TextView textView = view.findViewById(R.layout.tex)
+                myViewModel.createNewGroup(groupName);
+                chatGroupDialog.dismiss();
+            }
+        });
+
     }
 }
